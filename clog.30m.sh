@@ -4,7 +4,8 @@ clover="iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAERlWElm
 err="iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAQAAABLCVATAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JQAAgIMAAPn/AACA6QAAdTAAAOpgAAA6mAAAF2+SX8VGAAAAAmJLR0QA/4ePzL8AAAAJcEhZcwAAFiUAABYlAUlSJPAAAAAHdElNRQfiBQsGEQIx4ybWAAABbklEQVRIx92WoU/DUBCHvyNTQFKP2X/QgSaVI5hKXBMUUyQ4SJieALeECeZIZhrkzJK6LWjIDHoT+CYMewhgfS1vK+0mFk69l7v78rvfe3mtKOuJrTVx/jOokiwFoE6DfXZyuma80CWC5KhETdAVFwVEtLmxg+o8FJznVCObR43CxhgdhkfULKUxQ6aAi2fJ1uyg3V+FLe3MB69yjZ/JGx2mR2+ZskvtgTi4xDoGkDCrS/dsHqVjpD2QgFdCBhICcLfYrsWgIQDN750nPuioDGgM4uHM9y5Lo7Iw05TYwEAfxCkDSito6RgIyoDM+Do/l/MyHplqeiA+IaVG+4mRdkB87peX5SvqA3CbV5YPmmSuQenRstegtCKHyV9AeYomHGssDgOqqymaagwaMy0y2rsl70kAElifNZglS/M9euQw34tUPOmJTVG3ICbVYYIi2oUwbaJkk/6uwRFnHLCdg/jgeckHcrXYvJ+IzQN9Ak4fWFFvEqRoAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE4LTA1LTEwVDIyOjIxOjU5KzA4OjAwVEb/dwAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxOC0wNS0xMFQyMjoxNzowMiswODowMPsACxMAAAAASUVORK5CYII="
 
 tag=$(curl -s https://api.github.com/repos/CloverHackyColor/CloverBootloader/releases/latest | grep tag_name | sed 's/[^0-9]//g')
-catalog=$(curl -s https://api.github.com/repos/CloverHackyColor/CloverBootloader/releases/latest | grep body | awk -F '"' '{print $4}')
+#catalog=$(curl -s https://api.github.com/repos/CloverHackyColor/CloverBootloader/releases/latest | grep body | awk -F '"' '{print $4}')
+catalog=$(curl -s https://api.github.com/repos/CloverHackyColor/CloverBootloader/commits | grep message | awk -F 'message": "' '{print $2}' | sed 's/",//g' | sed -n 1p)
 zh_log=$(curl -s "http://translate.google.cn/translate_a/single?client=gtx&dt=t&dj=1&ie=UTF-8&sl=auto&tl=zh_CN&q=$(echo "$catalog"|tr -d '\n'|xxd -ps|sed 's/\(..\)/%\1/g'|tr -d '\n')" | awk -F '"' '{print $6}')
 
 echo "|image=$clover"
